@@ -71,8 +71,6 @@ pipeline {
                         ls -l dist
                     """, """
                         echo Building app...
-                        // npm run build
-                        // dir dist
                         
                     """)
                 }
