@@ -29,16 +29,39 @@ pipeline {
             }
         }
 
-        stage('🧹 Clean Workspace') {
+         // Linux
+        // stage('🧹 Clean Workspace') {
+        //     steps {
+        //         bat '''
+        //           echo 🧹 Cleaning old files...
+        //           rmdir /s /q node_modules 2>NUL
+        //           del package-lock.json 2>NUL
+        //           rmdir /s /q dist 2>NUL
+        //         '''
+        //     }
+        // }
+         
+         // Windows
+         stage('🧹 Clean Workspace') {
             steps {
                 bat '''
                   echo 🧹 Cleaning old files...
-                  rmdir /s /q node_modules 2>NUL
-                  del package-lock.json 2>NUL
-                  rmdir /s /q dist 2>NUL
+        
+                  IF EXIST node_modules (
+                    rmdir /s /q node_modules
+                  )
+        
+                  IF EXIST package-lock.json (
+                    del package-lock.json
+                  )
+        
+                  IF EXIST dist (
+                    rmdir /s /q dist
+                  )
                 '''
             }
         }
+
 
         stage('📦 Install Dependencies') {
             steps {
