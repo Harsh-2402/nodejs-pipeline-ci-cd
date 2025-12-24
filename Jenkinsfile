@@ -17,12 +17,12 @@ pipeline {
         BUILD_DIR = 'dist'
     }
 
-    stages {
+     stages {
 
         stage('🔍 Environment Check') {
             steps {
-                sh '''
-                  echo "🧠 Checking environment..."
+                bat '''
+                  echo 🧠 Checking environment...
                   node -v
                   npm -v
                 '''
@@ -31,17 +31,19 @@ pipeline {
 
         stage('🧹 Clean Workspace') {
             steps {
-                sh '''
-                  echo "🧹 Cleaning previous build artifacts..."
-                  rm -rf node_modules package-lock.json dist
+                bat '''
+                  echo 🧹 Cleaning old files...
+                  rmdir /s /q node_modules 2>NUL
+                  del package-lock.json 2>NUL
+                  rmdir /s /q dist 2>NUL
                 '''
             }
         }
 
         stage('📦 Install Dependencies') {
             steps {
-                sh '''
-                  echo "📦 Installing npm dependencies..."
+                bat '''
+                  echo 📦 Installing dependencies...
                   npm ci
                 '''
             }
@@ -49,16 +51,15 @@ pipeline {
 
         stage('🏗 Build Application') {
             steps {
-                sh '''
-                  echo "🏗 Building application..."
+                bat '''
+                  echo 🏗 Building app...
                   npm run build
-                  echo "📁 Build output:"
-                  ls -lh dist
+                  dir dist
                 '''
             }
         }
 
-        // stage('🚀 Deploy via CodeDeploy') {
+        // stage('🚀 Deploy to AWS CodeDeploy') {
         //     steps {
         //         echo "🚀 Deploying to AWS CodeDeploy..."
         //         step([
