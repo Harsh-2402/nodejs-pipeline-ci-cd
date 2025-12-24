@@ -67,7 +67,7 @@ pipeline {
             steps {
                 bat '''
                   echo 📦 Installing dependencies...
-                  npm ci
+                  npm i
                 '''
             }
         }
