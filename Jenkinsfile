@@ -7,9 +7,7 @@ pipeline {
 
     options {
         timestamps()                  // ⏱ Timestamped logs
-        ansiColor('xterm')            // 🎨 Colored logs
-        disableConcurrentBuilds()     // 🚫 Avoid parallel deploys
-    }
+     }
 
     environment {
         APP_NAME = 'nodejs-application'
