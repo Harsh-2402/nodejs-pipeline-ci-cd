@@ -58,21 +58,21 @@ pipeline {
             }
         }
 
-        stage('🚀 Deploy via CodeDeploy') {
-            steps {
-                echo "🚀 Deploying to AWS CodeDeploy..."
-                step([
-                    $class: 'AWSCodeDeployPublisher',
-                    applicationName: "${APP_NAME}",
-                    deploymentGroupName: "${DEPLOY_GROUP}",
-                    region: "${AWS_REGION}",
-                    s3bucket: "${S3_BUCKET}",
-                    includes: "${BUILD_DIR}/",
-                    deploymentGroupAppspec: false,
-                    waitForCompletion: false
-                ])
-            }
-        }
+        // stage('🚀 Deploy via CodeDeploy') {
+        //     steps {
+        //         echo "🚀 Deploying to AWS CodeDeploy..."
+        //         step([
+        //             $class: 'AWSCodeDeployPublisher',
+        //             applicationName: "${APP_NAME}",
+        //             deploymentGroupName: "${DEPLOY_GROUP}",
+        //             region: "${AWS_REGION}",
+        //             s3bucket: "${S3_BUCKET}",
+        //             includes: "${BUILD_DIR}/",
+        //             deploymentGroupAppspec: false,
+        //             waitForCompletion: false
+        //         ])
+        //     }
+        // }
     }
 
     post {
