@@ -21,19 +21,18 @@ pipeline {
 
         stage('Environment Check') {
             steps {
-                powershell '''
-                  Write-Host "📦 Installing dependencies..."
+                bat '''
+                  echo Checking environment...
                   node -v
                   npm -v
                 '''
             }
         }
 
-
          // Linux
         // stage('🧹 Clean Workspace') {
         //     steps {
-        //         sh '''
+        //         bat '''
         //           echo 🧹 Cleaning old files...
         //           rmdir /s /q node_modules 2>NUL
         //           del package-lock.json 2>NUL
@@ -45,8 +44,8 @@ pipeline {
          // Windows
          stage('Clean Workspace') {
             steps {
-                powershell '''
-                  Write-Host "🧹 Cleaning old files..."
+                bat '''
+                  echo Cleaning old files...
         
                   IF EXIST node_modules (
                     rmdir /s /q node_modules
@@ -66,17 +65,17 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                powershell '''
-                  Write-Host "📦 Installing dependencies..."
+                bat '''
+                  echo Installing dependencies...
                   npm i
                 '''
             }
         }
 
-        stage('🏗 Build Application') {
+        stage('Build Application') {
             steps {
-                powershell '''
-                  Write-Host "🏗 Building app..."
+                bat '''
+                  echo Building app...
                   npm run build
                   dir dist
                 '''
@@ -102,13 +101,13 @@ pipeline {
 
     post {
         success {
-            echo "✅ Deployment completed successfully 🎉"
+            echo "[OK] Deployment completed successfully"
         }
         failure {
-            echo "❌ Deployment failed 🚨 Check logs above"
+            echo "[ERROR] Deployment failed ** Check logs above"
         }
         always {
-            echo "📌 Pipeline execution finished"
+            echo "(*) Pipeline execution finished"
         }
     }
 }
