@@ -19,20 +19,21 @@ pipeline {
 
      stages {
 
-        stage('🔍 Environment Check') {
+        stage('Environment Check') {
             steps {
-                bat '''
-                  echo 🧠 Checking environment...
+                powershell '''
+                  Write-Host "📦 Installing dependencies..."
                   node -v
                   npm -v
                 '''
             }
         }
 
+
          // Linux
         // stage('🧹 Clean Workspace') {
         //     steps {
-        //         bat '''
+        //         sh '''
         //           echo 🧹 Cleaning old files...
         //           rmdir /s /q node_modules 2>NUL
         //           del package-lock.json 2>NUL
@@ -42,10 +43,10 @@ pipeline {
         // }
          
          // Windows
-         stage('🧹 Clean Workspace') {
+         stage('Clean Workspace') {
             steps {
-                bat '''
-                  echo 🧹 Cleaning old files...
+                powershell '''
+                  Write-Host "🧹 Cleaning old files..."
         
                   IF EXIST node_modules (
                     rmdir /s /q node_modules
@@ -63,10 +64,10 @@ pipeline {
         }
 
 
-        stage('📦 Install Dependencies') {
+        stage('Install Dependencies') {
             steps {
-                bat '''
-                  echo 📦 Installing dependencies...
+                powershell '''
+                  Write-Host "📦 Installing dependencies..."
                   npm i
                 '''
             }
@@ -74,8 +75,8 @@ pipeline {
 
         stage('🏗 Build Application') {
             steps {
-                bat '''
-                  echo 🏗 Building app...
+                powershell '''
+                  Write-Host "🏗 Building app..."
                   npm run build
                   dir dist
                 '''
